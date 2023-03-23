@@ -39,11 +39,9 @@ def profile_edit(request):
   user = request.user
   if request.method == "POST":
     name = request.POST.get('name')
-    phone = request.POST.get('phone')
     email = request.POST.get('email')
 
     user.full_name = name
-    user.phone = phone
     user.email = email
     user.save()
     return redirect('profile')
@@ -54,12 +52,11 @@ def profile_edit(request):
 def register(request):
   if request.method == 'POST':
     full_name = request.POST.get('full_name')
-    phone = request.POST.get('phone')
     email = request.POST.get('email')
     password = request.POST.get('password')
     sic = request.POST.get('sic')
 
-    user = User(full_name=full_name, phone=phone, email=email, sic=sic)
+    user = User(full_name=full_name, email=email, sic=sic)
     user.set_password(password)
     user.save()
     return redirect('login')
